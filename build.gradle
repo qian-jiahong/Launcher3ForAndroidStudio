@@ -2,7 +2,6 @@ buildscript {
     repositories {
         mavenCentral()
         google()
-        jcenter()
     }
     dependencies {
         classpath GRADLE_CLASS_PATH
@@ -22,7 +21,7 @@ android {
 
     defaultConfig {
         minSdkVersion 25
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -54,6 +53,13 @@ android {
         l3go {
             dimension "app"
             applicationId 'com.android.launcher3'
+            testApplicationId 'com.android.launcher3.tests'
+        }
+
+        // PARRY 2021.07.19 for Android studio build @{
+        hong {
+            dimension "app"
+            applicationId 'app.hong.launcher'
             testApplicationId 'com.android.launcher3.tests'
         }
 
@@ -131,6 +137,12 @@ android {
             java.srcDirs = ['quickstep/src', 'quickstep/recents_ui_overrides/src']
             manifest.srcFile "quickstep/AndroidManifest.xml"
         }
+
+        // PARRY 2021.07.19 for Android studio build @{
+        hong {
+            java.srcDirs = ['src_flags', 'src_shortcuts_overrides']
+            manifest.srcFile "AndroidManifest.xml"
+        }
     }
 }
 
@@ -158,6 +170,11 @@ dependencies {
     // Required for AOSP to compile. This is already included in the sysui_shared.jar
     withoutQuickstepImplementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/libs", include: 'plugin_core.jar')
 
+    // PARRY 2021.07.19 for Android studio build @{
+    implementation fileTree(dir: "libs", include: 'plugin_core.jar')
+    implementation PROTOBUF_DEPENDENCY
+    // @}
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation "org.mockito:mockito-core:1.9.5"
     androidTestImplementation 'com.google.dexmaker:dexmaker:1.2'
@@ -178,6 +195,7 @@ protobuf {
                 task.builtins {
                     remove java
                     javanano {
+                        option "java_package=launcher_atom.proto|com.android.launcher3.logger"  // PARRY 2021.07.19 for Android studio build
                         option "java_package=launcher_log_extension.proto|com.android.launcher3.userevent.nano"
                         option "java_package=launcher_log.proto|com.android.launcher3.userevent.nano"
                         option "java_package=launcher_dump.proto|com.android.launcher3.model.nano"

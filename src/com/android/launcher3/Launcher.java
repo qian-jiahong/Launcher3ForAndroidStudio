@@ -925,6 +925,7 @@ public class Launcher extends StatefulActivity<LauncherState> implements Launche
 
 
     private void logStopAndResume(int command) {
+/*
         int pageIndex = mWorkspace.isOverlayShown() ? -1 : mWorkspace.getCurrentPage();
         int containerType = mStateManager.getState().containerType;
 
@@ -934,7 +935,7 @@ public class Launcher extends StatefulActivity<LauncherState> implements Launche
             logger.withSrcState(LAUNCHER_STATE_BACKGROUND)
                 .withDstState(containerTypeToAtomState(mStateManager.getState().containerType));
             event = LAUNCHER_ONRESUME;
-        } else { /* command == Action.Command.STOP */
+        } else {
             logger.withSrcState(containerTypeToAtomState(mStateManager.getState().containerType))
                     .withDstState(LAUNCHER_STATE_BACKGROUND);
             event = LAUNCHER_ONSTOP;
@@ -951,6 +952,7 @@ public class Launcher extends StatefulActivity<LauncherState> implements Launche
             getUserEventDispatcher().logActionCommand(command, containerType, -1);
         }
         logger.log(event);
+*/
     }
 
     private void scheduleDeferredCheck() {

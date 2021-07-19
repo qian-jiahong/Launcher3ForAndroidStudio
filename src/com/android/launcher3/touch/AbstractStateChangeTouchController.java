@@ -561,10 +561,11 @@ public abstract class AbstractStateChangeTouchController
 
     private void logReachedState(int logAction, LauncherState targetState) {
         // Transition complete. log the action
+/*
         mLauncher.getUserEventDispatcher().logStateChangeAction(logAction,
                 getDirectionForLog(), mDetector.getDownX(), mDetector.getDownY(),
-                mStartContainerType /* e.g., hotseat */,
-                mStartState.containerType /* e.g., workspace */,
+                mStartContainerType,
+                mStartState.containerType,
                 targetState.containerType,
                 mLauncher.getWorkspace().getCurrentPage());
         mLauncher.getStatsLogManager().logger()
@@ -579,6 +580,7 @@ public abstract class AbstractStateChangeTouchController
                             targetState.containerType, mToState.ordinal > mFromState.ordinal
                                     ? LAUNCHER_UNKNOWN_SWIPEUP
                                     : LAUNCHER_UNKNOWN_SWIPEDOWN));
+*/
     }
 
     protected void clearState() {

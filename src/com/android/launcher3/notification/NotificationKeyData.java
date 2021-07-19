@@ -17,11 +17,12 @@
 package com.android.launcher3.notification;
 
 import android.app.Notification;
-import android.app.Person;
+import android.os.Build;
 import android.service.notification.StatusBarNotification;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.Person;
 
 import com.android.launcher3.Utilities;
 
@@ -51,9 +52,20 @@ public class NotificationKeyData {
 
     public static NotificationKeyData fromNotification(StatusBarNotification sbn) {
         Notification notif = sbn.getNotification();
+/*
         return new NotificationKeyData(sbn.getKey(), notif.getShortcutId(), notif.number,
                 extractPersonKeyOnly(notif.extras.getParcelableArrayList(
                         Notification.EXTRA_PEOPLE_LIST)));
+*/
+        // PARRY 2021.07.19 @{
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return new NotificationKeyData(sbn.getKey(), notif.getShortcutId(), notif.number,
+                    Utilities.EMPTY_STRING_ARRAY);
+        } else {
+            return new NotificationKeyData(sbn.getKey(), "", notif.number,
+                    Utilities.EMPTY_STRING_ARRAY);
+        }
+        // @}
     }
 
     public static List<String> extractKeysOnly(

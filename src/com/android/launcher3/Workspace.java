@@ -1003,6 +1003,7 @@ public class Workspace extends PagedView<WorkspacePageIndicator>
             if (!mOverlayShown) {
                 mLauncher.getUserEventDispatcher().logActionOnContainer(Action.Touch.SWIPE,
                         Action.Direction.LEFT, ContainerType.WORKSPACE, 0);
+/*
                 mLauncher.getStatsLogManager().logger()
                         .withSrcState(LAUNCHER_STATE_HOME)
                         .withDstState(LAUNCHER_STATE_HOME)
@@ -1012,6 +1013,7 @@ public class Workspace extends PagedView<WorkspacePageIndicator>
                                                 .setPageIndex(0))
                                 .build())
                         .log(LAUNCHER_SWIPELEFT);
+*/
             }
             mOverlayShown = true;
             // Not announcing the overlay page for accessibility since it announces itself.
@@ -1021,6 +1023,7 @@ public class Workspace extends PagedView<WorkspacePageIndicator>
                 if (!ued.isPreviousHomeGesture()) {
                     mLauncher.getUserEventDispatcher().logActionOnContainer(Action.Touch.SWIPE,
                         Action.Direction.RIGHT, ContainerType.WORKSPACE, -1);
+/*
                     mLauncher.getStatsLogManager().logger()
                             .withSrcState(LAUNCHER_STATE_HOME)
                             .withDstState(LAUNCHER_STATE_HOME)
@@ -1030,6 +1033,7 @@ public class Workspace extends PagedView<WorkspacePageIndicator>
                                                     .setPageIndex(-1))
                                     .build())
                             .log(LAUNCHER_SWIPERIGHT);
+*/
                 }
             } else if (Float.compare(mOverlayTranslation, 0f) != 0) {
                 // When arriving to 0 overscroll from non-zero overscroll, announce page for
@@ -1127,6 +1131,7 @@ public class Workspace extends PagedView<WorkspacePageIndicator>
                     ? LAUNCHER_SWIPERIGHT : LAUNCHER_SWIPELEFT;
             mLauncher.getUserEventDispatcher().logActionOnContainer(Action.Touch.SWIPE,
                     swipeDirection, ContainerType.WORKSPACE, prevPage);
+/*
             mLauncher.getStatsLogManager().logger()
                     .withSrcState(LAUNCHER_STATE_HOME)
                     .withDstState(LAUNCHER_STATE_HOME)
@@ -1135,6 +1140,7 @@ public class Workspace extends PagedView<WorkspacePageIndicator>
                                     LauncherAtom.WorkspaceContainer.newBuilder()
                                             .setPageIndex(prevPage)).build())
                     .log(event);
+*/
         }
     }
 

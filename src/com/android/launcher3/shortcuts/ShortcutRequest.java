@@ -95,13 +95,22 @@ public class ShortcutRequest {
         if (GO_DISABLE_WIDGETS || mFailed) {
             return QueryResult.DEFAULT;
         }
+
+        // parry 2021.07.19 @{
+        LauncherApps LauncherApps = mContext.getSystemService(LauncherApps.class);
+        if (!LauncherApps.hasShortcutHostPermission()){
+            Log.w(TAG, "Can't access shortcut information!");
+            return QueryResult.DEFAULT;
+        }
+        // @}
+
         mQuery.setQueryFlags(flags);
 
         try {
             return new QueryResult(mContext.getSystemService(LauncherApps.class)
                     .getShortcuts(mQuery, mUserHandle));
         } catch (SecurityException | IllegalStateException e) {
-            Log.e(TAG, "Failed to query for shortcuts", e);
+            Log.e(TAG, "Failed to query for shortcuts: " + e.getLocalizedMessage(), e);
             return QueryResult.DEFAULT;
         }
     }

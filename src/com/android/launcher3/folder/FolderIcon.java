@@ -460,13 +460,14 @@ public class FolderIcon extends FrameLayout implements FolderListener, IconLabel
             return;
         }
         CharSequence newTitle = nameInfos.getLabels()[0];
-        FromState fromState = mInfo.getFromLabelState();
+//        FromState fromState = mInfo.getFromLabelState();
 
         mInfo.setTitle(newTitle, mFolder.mLauncher.getModelWriter());
         onTitleChanged(mInfo.title);
         mFolder.mFolderName.setText(mInfo.title);
 
         // Logging for folder creation flow
+/*
         StatsLogManager.newInstance(getContext()).logger()
                 .withInstanceId(instanceId)
                 .withItemInfo(mInfo)
@@ -477,6 +478,7 @@ public class FolderIcon extends FrameLayout implements FolderListener, IconLabel
                 .withEditText(newTitle.toString())
                 .log(LAUNCHER_FOLDER_AUTO_LABELED);
         mFolder.logFolderLabelState(fromState, ToState.TO_SUGGESTION0);
+*/
     }
 
 

@@ -16,7 +16,6 @@
 
 package com.android.launcher3.model.data;
 
-import android.app.Person;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +23,7 @@ import android.content.pm.ShortcutInfo;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.Person;
 
 import com.android.launcher3.LauncherSettings;
 import com.android.launcher3.LauncherSettings.Favorites;

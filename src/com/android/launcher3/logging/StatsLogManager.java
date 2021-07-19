@@ -30,7 +30,7 @@ import com.android.launcher3.logger.LauncherAtom.ContainerInfo;
 import com.android.launcher3.logger.LauncherAtom.FromState;
 import com.android.launcher3.logger.LauncherAtom.ToState;
 import com.android.launcher3.model.data.ItemInfo;
-import com.android.launcher3.userevent.LauncherLogProto;
+//import com.android.launcher3.userevent.LauncherLogProto;
 import com.android.launcher3.util.ResourceBasedOverride;
 
 /**
@@ -53,6 +53,7 @@ public class StatsLogManager implements ResourceBasedOverride {
      * (to be removed during UserEventDispatcher cleanup)
      */
     public static int containerTypeToAtomState(int containerType) {
+/*
         switch (containerType) {
             case LauncherLogProto.ContainerType.ALLAPPS_VALUE:
                 return LAUNCHER_STATE_ALLAPPS;
@@ -63,6 +64,7 @@ public class StatsLogManager implements ResourceBasedOverride {
             case LauncherLogProto.ContainerType.APP_VALUE:
                 return LAUNCHER_STATE_BACKGROUND;
         }
+*/
         return LAUNCHER_STATE_UNSPECIFIED;
     }
 
@@ -73,6 +75,7 @@ public class StatsLogManager implements ResourceBasedOverride {
      */
     public static EventEnum getLauncherAtomEvent(int startContainerType,
             int targetContainerType, EventEnum fallbackEvent) {
+/*
         if (startContainerType == LauncherLogProto.ContainerType.WORKSPACE.getNumber()
                 && targetContainerType == LauncherLogProto.ContainerType.WORKSPACE.getNumber()) {
             return LAUNCHER_HOME_GESTURE;
@@ -86,6 +89,7 @@ public class StatsLogManager implements ResourceBasedOverride {
                 && targetContainerType != LauncherLogProto.ContainerType.ALLAPPS.getNumber()) {
             return LAUNCHER_ALLAPPS_CLOSE_DOWN;
         }
+*/
         return fallbackEvent; // TODO fix
     }
 

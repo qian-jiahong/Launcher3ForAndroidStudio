@@ -16,8 +16,9 @@
 
 package com.android.launcher3.uioverrides;
 
-import android.app.Person;
 import android.content.pm.ShortcutInfo;
+
+import androidx.core.app.Person;
 
 import com.android.launcher3.Utilities;
 

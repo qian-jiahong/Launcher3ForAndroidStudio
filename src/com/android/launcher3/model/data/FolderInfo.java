@@ -25,10 +25,18 @@ import static com.android.launcher3.LauncherSettings.Favorites.CONTAINER_HOTSEAT
 import static com.android.launcher3.logger.LauncherAtom.Attribute.EMPTY_LABEL;
 import static com.android.launcher3.logger.LauncherAtom.Attribute.MANUAL_LABEL;
 import static com.android.launcher3.logger.LauncherAtom.Attribute.SUGGESTED_LABEL;
+/*
 import static com.android.launcher3.userevent.LauncherLogProto.Target.FromFolderLabelState.FROM_CUSTOM;
 import static com.android.launcher3.userevent.LauncherLogProto.Target.FromFolderLabelState.FROM_EMPTY;
 import static com.android.launcher3.userevent.LauncherLogProto.Target.FromFolderLabelState.FROM_FOLDER_LABEL_STATE_UNSPECIFIED;
 import static com.android.launcher3.userevent.LauncherLogProto.Target.FromFolderLabelState.FROM_SUGGESTED;
+*/
+// PARRY 2021.07.19 for Android studio build @{
+import static com.android.launcher3.userevent.nano.LauncherLogProto.Target.FromFolderLabelState.FROM_CUSTOM;
+import static com.android.launcher3.userevent.nano.LauncherLogProto.Target.FromFolderLabelState.FROM_EMPTY;
+import static com.android.launcher3.userevent.nano.LauncherLogProto.Target.FromFolderLabelState.FROM_FOLDER_LABEL_STATE_UNSPECIFIED;
+import static com.android.launcher3.userevent.nano.LauncherLogProto.Target.FromFolderLabelState.FROM_SUGGESTED;
+// @}
 
 import android.os.Process;
 
@@ -43,11 +51,19 @@ import com.android.launcher3.logger.LauncherAtom.Attribute;
 import com.android.launcher3.logger.LauncherAtom.FromState;
 import com.android.launcher3.logger.LauncherAtom.ToState;
 import com.android.launcher3.model.ModelWriter;
+/*
 import com.android.launcher3.userevent.LauncherLogProto;
 import com.android.launcher3.userevent.LauncherLogProto.Target;
 import com.android.launcher3.userevent.LauncherLogProto.Target.FromFolderLabelState;
 import com.android.launcher3.userevent.LauncherLogProto.Target.ToFolderLabelState;
+*/
+// PARRY 2021.07.19 for Android studio build @{
+import com.android.launcher3.userevent.nano.LauncherLogProto;
+import com.android.launcher3.userevent.nano.LauncherLogProto.Target;
+import com.android.launcher3.userevent.nano.LauncherLogProto.Target.FromFolderLabelState;
+import com.android.launcher3.userevent.nano.LauncherLogProto.Target.ToFolderLabelState;
 import com.android.launcher3.util.ContentWriter;
+//@}
 
 import java.util.ArrayList;
 import java.util.OptionalInt;
@@ -95,9 +111,11 @@ public class FolderInfo extends ItemInfo {
         // and different from any of suggested values.
         MANUAL(MANUAL_LABEL);
 
-        private final LauncherAtom.Attribute mLogAttribute;
+//        private final LauncherAtom.Attribute mLogAttribute;
+        private final int mLogAttribute;
 
-        LabelState(Attribute logAttribute) {
+//        LabelState(Attribute logAttribute) {
+        LabelState(int logAttribute) {
             this.mLogAttribute = logAttribute;
         }
     }
@@ -207,6 +225,7 @@ public class FolderInfo extends ItemInfo {
         return String.format("%s; labelState=%s", super.dumpProperties(), getLabelState());
     }
 
+/*
     @Override
     public LauncherAtom.ItemInfo buildProto(FolderInfo fInfo) {
         return getDefaultItemInfoBuilder()
@@ -216,6 +235,7 @@ public class FolderInfo extends ItemInfo {
                 .setContainerInfo(getContainerInfo())
                 .build();
     }
+*/
 
     @Override
     public void setTitle(@Nullable CharSequence title, ModelWriter modelWriter) {
@@ -268,10 +288,12 @@ public class FolderInfo extends ItemInfo {
     /**
      * Returns {@link LauncherAtom.FolderIcon} wrapped as {@link LauncherAtom.ItemInfo} for logging.
      */
+/*
     @Override
     public LauncherAtom.ItemInfo buildProto() {
         return buildProto(null);
     }
+*/
 
     /**
      * Returns index of the accepted suggestion.
@@ -294,6 +316,7 @@ public class FolderInfo extends ItemInfo {
     /**
      * Returns {@link FromState} based on current {@link #title}.
      */
+/*
     public LauncherAtom.FromState getFromLabelState() {
         switch (getLabelState()){
             case EMPTY:
@@ -307,10 +330,12 @@ public class FolderInfo extends ItemInfo {
                 return LauncherAtom.FromState.FROM_STATE_UNSPECIFIED;
         }
     }
+*/
 
     /**
      * Returns {@link ToState} based on current {@link #title}.
      */
+/*
     public LauncherAtom.ToState getToLabelState() {
         if (title == null) {
             return LauncherAtom.ToState.TO_STATE_UNSPECIFIED;
@@ -359,12 +384,14 @@ public class FolderInfo extends ItemInfo {
         }
         return LauncherAtom.ToState.TO_STATE_UNSPECIFIED;
     }
+*/
 
     /**
      * Returns {@link LauncherLogProto.LauncherEvent} to log current folder label info.
      *
      * @deprecated This method is used only for validation purpose and soon will be removed.
      */
+/*
     @Deprecated
     public LauncherLogProto.LauncherEvent getFolderLabelStateLauncherEvent(FromState fromState,
             ToState toState) {
@@ -388,10 +415,12 @@ public class FolderInfo extends ItemInfo {
                 .addSrcTarget(newParentContainerTarget())
                 .build();
     }
+*/
 
     /**
      * @deprecated This method is used only for validation purpose and soon will be removed.
      */
+/*
     @Deprecated
     private Target.Builder newParentContainerTarget() {
         Target.Builder builder = Target.newBuilder().setType(Target.Type.CONTAINER);
@@ -408,10 +437,12 @@ public class FolderInfo extends ItemInfo {
                                 container));
         }
     }
+*/
 
     /**
      * @deprecated This method is used only for validation purpose and soon will be removed.
      */
+/*
     @Deprecated
     private static FromFolderLabelState convertFolderLabelState(FromState fromState) {
         switch (fromState) {
@@ -425,10 +456,12 @@ public class FolderInfo extends ItemInfo {
                 return FROM_FOLDER_LABEL_STATE_UNSPECIFIED;
         }
     }
+*/
 
     /**
      * @deprecated This method is used only for validation purpose and soon will be removed.
      */
+/*
     @Deprecated
     private static ToFolderLabelState convertFolderLabelState(ToState toState) {
         switch (toState) {
@@ -468,4 +501,5 @@ public class FolderInfo extends ItemInfo {
                 return ToFolderLabelState.TO_FOLDER_LABEL_STATE_UNSPECIFIED;
         }
     }
+*/
 }
