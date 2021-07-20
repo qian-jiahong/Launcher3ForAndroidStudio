@@ -46,28 +46,31 @@ android {
     productFlavors {
         aosp {
             dimension "app"
+/*
             applicationId 'com.android.launcher3'
+*/
+            // PARRY 2021.07.19 for Android studio build @{
+            applicationId 'app.hong.launcher'
             testApplicationId 'com.android.launcher3.tests'
         }
 
         l3go {
             dimension "app"
+/*
             applicationId 'com.android.launcher3'
-            testApplicationId 'com.android.launcher3.tests'
-        }
-
-        // PARRY 2021.07.19 for Android studio build @{
-        hong {
-            dimension "app"
+*/
+            // PARRY 2021.07.19 for Android studio build
             applicationId 'app.hong.launcher'
             testApplicationId 'com.android.launcher3.tests'
         }
 
+/* remove PARRY 2021.07.19 for Android studio build
         withQuickstep {
             dimension "recents"
 
             minSdkVersion 28
         }
+*/
 
         withoutQuickstep {
             dimension "recents"
@@ -110,9 +113,11 @@ android {
             manifest.srcFile "AndroidManifest.xml"
         }
 
+/* remove PARRY 2021.07.19 for Android studio build
         aospWithQuickstep {
             manifest.srcFile "quickstep/AndroidManifest-launcher.xml"
         }
+*/
 
         l3go {
             res.srcDirs = ['go/res']
@@ -124,25 +129,24 @@ android {
             manifest.srcFile "AndroidManifest.xml"
         }
 
+/* remove PARRY 2021.07.19 for Android studio build
         l3goWithQuickstepDebug {
             manifest.srcFile "quickstep/AndroidManifest-launcher.xml"
         }
+*/
 
         withoutQuickstep {
             java.srcDirs = ['src_ui_overrides']
         }
 
+/* remove PARRY 2021.07.19 for Android studio build
         withQuickstep {
             res.srcDirs = ['quickstep/res', 'quickstep/recents_ui_overrides/res']
             java.srcDirs = ['quickstep/src', 'quickstep/recents_ui_overrides/src']
             manifest.srcFile "quickstep/AndroidManifest.xml"
         }
+*/
 
-        // PARRY 2021.07.19 for Android studio build @{
-        hong {
-            java.srcDirs = ['src_flags', 'src_shortcuts_overrides']
-            manifest.srcFile "AndroidManifest.xml"
-        }
     }
 }
 
@@ -161,11 +165,11 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:${ANDROID_X_VERSION}"
     implementation "androidx.preference:preference:${ANDROID_X_VERSION}"
     implementation project(':IconLoader')
-    withQuickstepImplementation project(':SharedLibWrapper')
+//    withQuickstepImplementation project(':SharedLibWrapper') // remove PARRY 2021.07.19 for Android studio build
     implementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/libs", include: 'launcher_protos.jar')
 
     // Recents lib dependency
-    withQuickstepImplementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/quickstep/libs", include: 'sysui_shared.jar')
+//    withQuickstepImplementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/quickstep/libs", include: 'sysui_shared.jar') // remove PARRY 2021.07.19 for Android studio build
 
     // Required for AOSP to compile. This is already included in the sysui_shared.jar
     withoutQuickstepImplementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/libs", include: 'plugin_core.jar')
