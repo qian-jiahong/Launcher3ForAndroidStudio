@@ -1,3 +1,4 @@
+/*
 apply plugin: 'java'
 
 final String ANDROID_TOP = "${rootDir}/../../.."
@@ -10,8 +11,51 @@ sourceSets {
 }
 
 sourceCompatibility = 1.8
+*/
 
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion COMPILE_SDK
+    buildToolsVersion BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion 25
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src', 'src_full_lib', '../src_plugins']
+            manifest.srcFile 'AndroidManifest.xml'
+            res.srcDirs = ['res']
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
 dependencies {
+/*
     implementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/quickstep/libs", include: 'sysui_shared.jar')
     compileOnly fileTree(dir: "$ANDROID_TOP/prebuilts/fullsdk-${org.gradle.internal.os.OperatingSystem.current().isMacOsX() ? "darwin" : "linux"}/platforms/${COMPILE_SDK}", include: 'android.jar')
+*/
+    implementation "androidx.annotation:annotation:${ANDROID_X_VERSION}"
+    implementation "androidx.core:core:${ANDROID_X_VERSION}"
+    implementation fileTree(dir: "../libs", include: 'sysui_shared.jar')
+    implementation fileTree(dir: "../libs", include: 'plugin_core.jar')
+    compileOnly files('libs/android-30.jar')
+    implementation PROTOBUF_DEPENDENCY
 }
